@@ -23,43 +23,32 @@ class SignInActivity : AppCompatActivity() {
 
         Log.i(TAG, "onCreate()")
 
+        val btn1 = findViewById<Button>(R.id.btn_signin)
+
         val idEditText = findViewById<EditText>(R.id.editId)
         val pwEditText = findViewById<EditText>(R.id.editPw)
 
-        val btn1 = findViewById<Button>(R.id.btn_signin)
-
         btn1.setOnClickListener {
 
-            if (idEditText.text.isEmpty()) {
-                Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            val idInput = findViewById<EditText>(R.id.editId)
+            val strData = idInput.text.toString()
 
-            } else if (pwEditText.text.isEmpty()) {
-                Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            if (idEditText.text.isEmpty() || pwEditText.text.isEmpty()) {
+                Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
 
             } else {
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("dataFromFirstActivity", strData)
                 startActivity(intent)
             }
-        }
-
-        val btn_data = findViewById<Button>(R.id.btn_signin)
-
-        btn_data.setOnClickListener {
-            val idInput = findViewById<EditText>(R.id.editId)
-            val strData = idInput.text.toString()
-
-            val intent = Intent(this, HomeActivity::class.java)
-            intent.putExtra("dataFromFirstActivity", strData)
-            startActivity(intent)
         }
 
         val btn2 = findViewById<Button>(R.id.btn_signup1)
 
         btn2.setOnClickListener {
+
             val intent = Intent(this, SignUpActivity::class.java)
             resultLauncher.launch(intent)
         }

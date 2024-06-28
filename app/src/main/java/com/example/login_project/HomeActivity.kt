@@ -2,9 +2,8 @@ package com.example.login_project
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
@@ -20,6 +19,10 @@ class HomeActivity : AppCompatActivity() {
 
         Log.i(TAG, "onCreate()")
 
+        val strData = intent.getStringExtra("dataFromFirstActivity")
+        val editId = findViewById<TextView>(R.id.displayId)
+        editId.text = strData
+
         val randomImg = findViewById<ImageView>(R.id.imageView2)
         when(Random.nextInt(1, 6)) {
             1 -> randomImg.setImageResource(R.drawable.yt_home1)
@@ -29,11 +32,11 @@ class HomeActivity : AppCompatActivity() {
             5 -> randomImg.setImageResource(R.drawable.yt_home5)
         }
 
-        val strData = intent.getStringExtra("dataFromFirstActivity")
-        val editId = findViewById<EditText>(R.id.edit_id)
-        editId.setText(strData)
+        val emoji = findViewById<TextView>(R.id.btn_text_emoji)
 
-        val btnExit = findViewById<Button>(R.id.btn_exit)
+        emoji.text = "${String(Character.toChars(0x23F9))}"
+
+        val btnExit = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.btn_exit)
         btnExit.setOnClickListener {
             finish()
         }
